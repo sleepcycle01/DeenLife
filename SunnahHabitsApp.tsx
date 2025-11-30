@@ -62,6 +62,15 @@ export const SunnahHabitsApp: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    // Derive active tab from URL path
+    const getActiveTab = () => {
+        const path = location.pathname.replace('/', '');
+        const validTabs = ['habits', 'quran', 'audio', 'hadith', 'dua', 'prayers', 'qibla'];
+        return validTabs.includes(path) ? path : 'habits';
+    };
+
+    const activeTab = getActiveTab();
+
     // Language State
     const [language, setLanguage] = useState<Language>(() => {
         try {
@@ -73,16 +82,6 @@ export const SunnahHabitsApp: React.FC = () => {
 
     const t = useCallback((key: string) => TRANSLATIONS[language]?.[key] || TRANSLATIONS['en'][key] || key, [language]);
     const isRTL = language === 'ar' || language === 'ur';
-
-    // Main Tab State
-    const [activeTab, setActiveTab] = useState<'habits' | 'quran' | 'audio' | 'hadith' | 'dua' | 'prayers' | 'qibla'>('habits');
-
-    // Handle navigation from Home page
-    useEffect(() => {
-        if (location.state && location.state.activeTab) {
-            setActiveTab(location.state.activeTab);
-        }
-    }, [location]);
 
     // Quran Tracker State
     const [searchQuery, setSearchQuery] = useState('');
@@ -778,13 +777,13 @@ export const SunnahHabitsApp: React.FC = () => {
                     </div>
 
                     <div className="flex bg-slate-900/50 p-1 rounded-lg max-w-full overflow-x-auto mx-auto scrollbar-hide">
-                        <button onClick={() => setActiveTab('habits')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'habits' ? 'bg-yellow-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><Sparkles className="w-4 h-4" /> {t('tab_sunnah')}</span></button>
-                        <button onClick={() => setActiveTab('quran')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'quran' ? 'bg-sky-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><BookOpen className="w-4 h-4" /> {t('tab_quran')}</span></button>
-                        <button onClick={() => setActiveTab('audio')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'audio' ? 'bg-teal-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><Headphones className="w-4 h-4" /> {t('tab_audio')}</span></button>
-                        <button onClick={() => setActiveTab('hadith')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'hadith' ? 'bg-orange-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><Book className="w-4 h-4" /> {t('tab_hadith')}</span></button>
-                        <button onClick={() => setActiveTab('dua')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'dua' ? 'bg-purple-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><Lightbulb className="w-4 h-4" /> {t('tab_dua')}</span></button>
-                        <button onClick={() => setActiveTab('prayers')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'prayers' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><Clock className="w-4 h-4" /> {t('tab_prayers')}</span></button>
-                        <button onClick={() => setActiveTab('qibla')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'qibla' ? 'bg-red-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><Compass className="w-4 h-4" /> {t('tab_qibla')}</span></button>
+                        <button onClick={() => navigate('/habits')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'habits' ? 'bg-yellow-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><Sparkles className="w-4 h-4" /> {t('tab_sunnah')}</span></button>
+                        <button onClick={() => navigate('/quran')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'quran' ? 'bg-sky-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><BookOpen className="w-4 h-4" /> {t('tab_quran')}</span></button>
+                        <button onClick={() => navigate('/audio')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'audio' ? 'bg-teal-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><Headphones className="w-4 h-4" /> {t('tab_audio')}</span></button>
+                        <button onClick={() => navigate('/hadith')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'hadith' ? 'bg-orange-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><Book className="w-4 h-4" /> {t('tab_hadith')}</span></button>
+                        <button onClick={() => navigate('/dua')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'dua' ? 'bg-purple-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><Lightbulb className="w-4 h-4" /> {t('tab_dua')}</span></button>
+                        <button onClick={() => navigate('/prayers')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'prayers' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><Clock className="w-4 h-4" /> {t('tab_prayers')}</span></button>
+                        <button onClick={() => navigate('/qibla')} className={`flex-none min-w-fit sm:flex-1 py-2 px-4 text-sm font-semibold rounded-md transition-all whitespace-nowrap ${activeTab === 'qibla' ? 'bg-red-600 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-slate-700'}`}><span className="flex items-center justify-center gap-2"><Compass className="w-4 h-4" /> {t('tab_qibla')}</span></button>
                     </div>
                 </div>
 

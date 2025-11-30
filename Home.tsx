@@ -7,23 +7,20 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleStartTracking = () => {
-    navigate('/app');
-  };
-
-  const navigateToTab = (tab: string) => {
-    navigate('/app', { state: { activeTab: tab } });
+  // Directly navigate to the path
+  const navigateToTab = (path: string) => {
+    navigate(path);
     setIsMenuOpen(false);
   };
 
   const menuItems = [
-    { label: 'Sunnah Habits', tab: 'habits', icon: Sparkles },
-    { label: 'Quran Tracker', tab: 'quran', icon: BookOpen },
-    { label: 'Quran Audio', tab: 'audio', icon: Headphones },
-    { label: 'Hadith Collection', tab: 'hadith', icon: Book },
-    { label: 'Dua Collection', tab: 'dua', icon: Lightbulb },
-    { label: 'Prayer Times', tab: 'prayers', icon: Clock },
-    { label: 'Qibla Finder', tab: 'qibla', icon: Compass },
+    { label: 'Sunnah Habits', path: '/habits', icon: Sparkles },
+    { label: 'Quran Tracker', path: '/quran', icon: BookOpen },
+    { label: 'Quran Audio', path: '/audio', icon: Headphones },
+    { label: 'Hadith Collection', path: '/hadith', icon: Book },
+    { label: 'Dua Collection', path: '/dua', icon: Lightbulb },
+    { label: 'Prayer Times', path: '/prayers', icon: Clock },
+    { label: 'Qibla Finder', path: '/qibla', icon: Compass },
   ];
 
   return (
@@ -73,8 +70,8 @@ const Home: React.FC = () => {
             <nav className="flex flex-col w-full gap-2 relative z-10">
               {menuItems.map((item) => (
                 <button
-                  key={item.tab}
-                  onClick={() => navigateToTab(item.tab)}
+                  key={item.label}
+                  onClick={() => navigateToTab(item.path)}
                   className="group flex items-center w-full p-3 rounded-xl text-left transition-all duration-200 hover:bg-slate-800 border border-transparent hover:border-slate-700"
                 >
                   <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800 group-hover:bg-slate-700 text-blue-400 group-hover:text-blue-300 transition-colors mr-4">
@@ -109,42 +106,30 @@ const Home: React.FC = () => {
           Your spiritual companion for a balanced life. Track your daily Sunnah habits, monitor your sleep etiquette, and stay connected with the Quran.
         </p>
 
-        {/* Call to Action Button */}
-        <button
-          onClick={handleStartTracking}
-          className="inline-flex items-center justify-center px-8 py-3.5 bg-[#0088cc] hover:bg-[#0077b3] text-white font-bold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-75 group"
-        >
-          <BookOpen className="w-5 h-5 mr-3" />
-          Start Tracking Habits
-          <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-          </svg>
-        </button>
-
         {/* Feature Icons (Minimal Style) */}
         <div className="mt-24 flex flex-wrap justify-center gap-12 sm:gap-20">
-          <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigateToTab('habits')}>
+          <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigateToTab('/habits')}>
             <div className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-800/30 border border-slate-700/30 mb-3 group-hover:bg-slate-800/50 transition-colors">
                <Heart className="w-7 h-7 text-red-400" />
             </div>
             <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">Spiritual Wellness</span>
           </div>
           
-          <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigateToTab('habits')}>
+          <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigateToTab('/habits')}>
             <div className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-800/30 border border-slate-700/30 mb-3 group-hover:bg-slate-800/50 transition-colors">
                <Moon className="w-7 h-7 text-indigo-400" />
             </div>
             <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">Sunnah Sleep</span>
           </div>
 
-          <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigateToTab('quran')}>
+          <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigateToTab('/quran')}>
             <div className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-800/30 border border-slate-700/30 mb-3 group-hover:bg-slate-800/50 transition-colors">
                <BookOpen className="w-7 h-7 text-green-400" />
             </div>
             <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">Quran Journey</span>
           </div>
 
-          <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigateToTab('qibla')}>
+          <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigateToTab('/qibla')}>
             <div className="w-14 h-14 flex items-center justify-center rounded-2xl bg-slate-800/30 border border-slate-700/30 mb-3 group-hover:bg-slate-800/50 transition-colors">
                <Compass className="w-7 h-7 text-red-500" />
             </div>
