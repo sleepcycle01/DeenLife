@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeenLife</title>
+    <link rel="icon" href="/icon.png" type="image/png">
+    <meta name="description" content="A comprehensive React web application for Muslims, offering tools like Quran tracking, audio playback, Hadith collection, daily Duas, prayer times, Qibla finder, and smart Dua explanations powered by Gemini.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #0d1222; /* Deeper blue background for homepage aesthetic */
+        color: #e2e8f0; /* Tailwind slate-200 */
+      }
+      /* Custom font for Arabic text */
+      @font-face {
+        font-family: 'Uthmanic Hafs';
+        src: url('https://raw.githubusercontent.com/islamic-network/quran-json/master/assets/fonts/UthmanicHafs_v20.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+      }
+      .font-arabic {
+        font-family: 'Uthmanic Hafs', serif;
+      }
+      /* Scrollbar Hide for specific elements */
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      .scrollbar-hide {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+      }
+
+      /* Basic animations */
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes slideInUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      .animate-fade-in-up {
+        animation: slideInUp 0.5s ease-out forwards;
+      }
+      @keyframes pulse-slow {
+        0%, 100% { transform: scale(1); opacity: 0.7; }
+        50% { transform: scale(1.1); opacity: 0.9; }
+      }
+      @keyframes pulse-medium {
+        0%, 100% { transform: scale(1); opacity: 0.7; }
+        50% { transform: scale(1.08); opacity: 0.9; }
+      }
+      @keyframes pulse-fast {
+        0%, 100% { transform: scale(1); opacity: 0.7; }
+        50% { transform: scale(1.12); opacity: 0.9; }
+      }
+      .animate-pulse-slow {
+        animation: pulse-slow 3s infinite ease-in-out;
+      }
+      .animate-pulse-medium {
+        animation: pulse-medium 2.5s infinite ease-in-out;
+      }
+      .animate-pulse-fast {
+        animation: pulse-fast 2s infinite ease-in-out;
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0"
+  }
+}
+</script>
+</head>
+<body class="bg-slate-950 text-slate-200 min-h-screen antialiased">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root" class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>

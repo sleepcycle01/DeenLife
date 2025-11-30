@@ -1,0 +1,8 @@
+{
+  "name": "DeenLife",
+  "description": "Your spiritual companion for a balanced life. Track your daily Sunnah habits, monitor your sleep etiquette, and stay connected with the Quran.",
+  "requestFramePermissions": [
+    "geolocation",
+    "microphone"
+  ]
+}
