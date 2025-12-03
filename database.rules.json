@@ -1,0 +1,14 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        // Only allow the authenticated user to read/write their own node
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid"
+      }
+    },
+    // Default deny for root and other paths
+    ".read": false,
+    ".write": false
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "DeenLife",
+  "description": "Your comprehensive Islamic lifestyle companion featuring prayer times, Qibla finder, Quran player, Sunnah habit tracking, and an AI spiritual assistant.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
